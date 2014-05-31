@@ -21,7 +21,7 @@ Response::macro('v1apijson', function ($http_code, $error, $data, $message = nul
 		$response_defaults['message'] = $message;
 	}
 	$json_data = array_merge($response_defaults,(Array)$data);
-	return Response::json($json_data, $http_code);
+	return Response::json($json_data, $http_code)->header('Access-Control-Allow-Origin','*');
 });
 
 use \apibvw\Model\User as ModelUser;
