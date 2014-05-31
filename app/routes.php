@@ -15,6 +15,7 @@
 Route::group(array('prefix' => 'v1'), function()
 {
 	Route::resource('users', 'apibvw\Controller\Users');
+	Route::controller('voiceacces', 'apibvw\Controller\VoiceAccess');
 });
 
 Route::get('/', function()
