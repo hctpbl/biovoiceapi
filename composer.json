@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"hctpbl/alizephp": ">=1.0"
+		"hctpbl/alizephp": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
