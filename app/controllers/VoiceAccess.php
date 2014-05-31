@@ -22,8 +22,7 @@ class VoiceAccess extends BaseController {
 		$f = fopen($audio_file_path, "w");
 		fwrite($f, $audio_raw);
 
-		return Response::json(array('error'=>false),200)
-				->header('Access-Control-Allow-Origin','*');
+		return Response::json(array('error'=>false),200);
 		
 		/*$speakerrec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario);
 		$speakerrec_package->enroll($audio_file_path);*/
