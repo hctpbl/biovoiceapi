@@ -9,6 +9,7 @@ use \Response;
 class VoiceAccess extends BaseController {
 	
 	public function postEnroll($usuario) {
+		$filetype = Request::header('Content-Type');
 		$audio_raw = Request::getContent();
 		
 		$extension = ".wav";
