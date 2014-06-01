@@ -18,7 +18,7 @@ class VoiceAccess extends BaseController {
 			$extension = ".ogg";
 		
 		$filename = $usuario.$extension;
-		$audio_file_path = storage_path("tmp_voices").$filename;
+		$audio_file_path = storage_path("tmp_voices/").$filename;
 		
 		$f = fopen($audio_file_path, "w");
 		fwrite($f, $audio_raw);
