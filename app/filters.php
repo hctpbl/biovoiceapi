@@ -13,7 +13,7 @@
 
 App::before(function($request)
 {
-    if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    /*if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         $statusCode = 204;
 
         $headers = [
@@ -24,17 +24,17 @@ App::before(function($request)
         ];
 
         return Response::make(null, $statusCode, $headers);
-    }
+    }*/
 });
 
 
 App::after(function($request, $response)
 {
-	$response->headers->set('Access-Control-Allow-Origin', '*');
+	/*$response->headers->set('Access-Control-Allow-Origin', '*');
 	$response->headers->set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 	$response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, X-Requested-With');
 	$response->headers->set('Access-Control-Allow-Credentials', 'true');
-	return $response;
+	return $response;*/
 });
 
 /*
