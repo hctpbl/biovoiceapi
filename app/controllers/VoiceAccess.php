@@ -9,7 +9,7 @@ use apibvw\SpeakerRec\SpeakerRecognitionManager;
 
 class VoiceAccess extends BaseController {
 	
-	public function postEnroll($usuario) {
+	private function handleAudio($usuario) {
 		$filetype = Request::header('Content-Type');
 		$audio_raw = Request::getContent();
 		
@@ -32,6 +32,13 @@ class VoiceAccess extends BaseController {
 			$raw_audio_file_path = AudioTools::OggToRaw($usuario);
 		}
 		
+		return $raw_audio_file_path;
+	}
+
+	public function postEnroll($usuario) {
+		
+		$raw_audio_file_path = $this->handleAudio($usuario);
+		
 		$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario,
 				SpeakerRecognitionManager::ENGINE_ALIZEPHP);
 		
@@ -41,5 +48,17 @@ class VoiceAccess extends BaseController {
 		
 		/*$speakerrec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario);
 		$speakerrec_package->enroll($audio_file_path);*/
+	}
+	
+	public function postTest($usuario) {
+		
+		$raw_audio_file_path = $this->handleAudio($usuario);
+		
+		$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario,
+				SpeakerRecognitionManager::ENGINE_ALIZEPHP);
+		
+		$result = $speaker_rec_package->testSpeakerIdentity($raw_audio_file_path);
+
+		return Response::json(array('error'=>false, 'result' => $result),200);
 	}
 }
