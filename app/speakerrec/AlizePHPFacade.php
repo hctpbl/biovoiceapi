@@ -24,7 +24,8 @@ class AlizePHPFacade implements SpeakerRecognitionPackage {
 		$alizephp_user->normaliseEnergy();
 		$alizephp_user->detectEnergy();
 		$alizephp_user->normaliseFeatures();
-		$alizephp_user->ivExtractor();
+		//$alizephp_user->ivExtractor();
+		$alizephp_user->trainTarget();
 	}
 	
 	public function enroll($audio_file_path) {
@@ -37,7 +38,8 @@ class AlizePHPFacade implements SpeakerRecognitionPackage {
 		// A "test" user is created, to test him against the enrolled user
 		$alizephp_user = new AlizePHP("test_".$this->getUser(), $audio_file_path);
 		$this->enroll_alizephp_user($alizephp_user);
-		$test_result = $alizephp_user->ivTest($this->getUser());
+		//$test_result = $alizephp_user->ivTest($this->getUser());
+		$alizephp_user->computeTest($this->getUser());
 		$alizephp_user->cleanUserFiles();
 		
 		return $test_result;
