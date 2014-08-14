@@ -45,9 +45,6 @@ class VoiceAccess extends BaseController {
 		$result = $speaker_rec_package->enroll($raw_audio_file_path);
 
 		return Response::json(array('error'=>false, 'result' => $result),200);
-		
-		/*$speakerrec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario);
-		$speakerrec_package->enroll($audio_file_path);*/
 	}
 	
 	public function postTest($usuario) {
@@ -60,5 +57,29 @@ class VoiceAccess extends BaseController {
 		$result = $speaker_rec_package->testSpeakerIdentity($raw_audio_file_path);
 
 		return Response::json(array('error'=>false, 'result' => $result),200);
+	}
+	
+	public function getStatus($usuario) {
+		$registered = false;
+		$enrolled = false;
+		
+		$user = ModelUser::find($username);
+		if ($user) {
+			$registered = true;
+			$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario);
+			$enrolled = $speaker_rec_package->isEnrolled();
+		}
+		
+		if (!$registered) {
+			return Response::json(array('error'=>false, 'registered'=>false,
+					'enrolled'=>false, 'message'=>'User not registered.'),200);
+		} else if (!$enrolled) {
+			return Response::json(array('error'=>false, 'registered'=>true,
+					'enrolled'=>false, 'message' => 'User not enrolled.'),200);
+		} else {
+			return Response::json(array('error'=>false, 'registered'=>true,
+					'enrolled'=>true, 'message' => 'User is valid.'),200);
+		}
+		
 	}
 }
