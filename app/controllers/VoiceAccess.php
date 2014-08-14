@@ -4,6 +4,7 @@ namespace apibvw\Controller;
 use \BaseController;
 use \Request;
 use \Response;
+use \apibvw\Model\User as ModelUser;
 use apibvw\SpeakerRec\AudioTools;
 use apibvw\SpeakerRec\SpeakerRecognitionManager;
 
