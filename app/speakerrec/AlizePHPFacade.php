@@ -16,7 +16,7 @@ class AlizePHPFacade implements SpeakerRecognitionPackage {
 	}
 	
 	public function isEnrolled() {
-		return AlizePHP::hasVector($user);
+		return AlizePHP::hasModel($this->alizephp_user);
 	}
 	
 	private function enroll_alizephp_user(AlizePHP $alizephp_user) {
