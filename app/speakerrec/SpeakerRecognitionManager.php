@@ -21,7 +21,7 @@ class SpeakerRecognitionManager {
 	 * @param number $engine Speaker recognition engine. Defaults to ENGINE_ALIZEPHP
 	 * @return \apibvw\SpeakerRec\SpeakerRecognitionPackage
 	 */
-	public static function getSpeakerRecognitionSystem($user, $engine=ENGINE_ALIZEPHP) {
+	public static function getSpeakerRecognitionSystem($user, $engine=SpeakerRecognitionManager::ENGINE_ALIZEPHP) {
 		return new AlizePHPFacade($user);
 	}
 }
