@@ -64,7 +64,7 @@ class VoiceAccess extends BaseController {
 		$registered = false;
 		$enrolled = false;
 		
-		$user = ModelUser::find($username);
+		$user = ModelUser::find($usuario);
 		if ($user) {
 			$registered = true;
 			$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario);
