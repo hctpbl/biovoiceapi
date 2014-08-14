@@ -38,7 +38,7 @@ class Users extends BaseController {
 		if (!$user) {
 			return Response::v1apijson(404,true,null,"User not foud");
 		}
-		return Response::v1apijson(200,false,array('users'=>$user->toArray()));
+		return Response::v1apijson(200,false,array('user'=>$user->toArray()));
 	}
 	
 	public function store() {
