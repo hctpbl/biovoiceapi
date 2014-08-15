@@ -61,7 +61,7 @@ class Users extends BaseController {
 			$usuario->email = $data['email'];
 			$usuario->save();
 			$usuario = ModelUser::find($data['username']);
-			return Response::v1apijson(201,false,array('users'=>$usuario->toArray()))
+			return Response::v1apijson(201,false,array('user'=>$usuario->toArray()))
 					->header('Location',URL::action('apibvw\Controller\Users@show',$data['username']));
 		}
 
