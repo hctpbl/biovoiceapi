@@ -1,5 +1,5 @@
 <?php
-namespace apibvw\Controller;
+namespace apibvw\SpeakerRec;
 
 use \BaseController;
 use \Input;
