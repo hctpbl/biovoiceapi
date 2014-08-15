@@ -24,7 +24,7 @@ class VoiceAccess extends BaseController {
 			$extension = ".wav";
 			if ($filetype == "audio/ogg")
 				$extension = ".ogg";
-			if ($filetype == "audio/aac")
+			if ($filetype == "audio/x-m4a")
 				$extension = ".m4a";
 			
 			$filename = $usuario.$extension;
