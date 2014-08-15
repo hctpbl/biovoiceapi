@@ -19,6 +19,9 @@ class VoiceAccess extends BaseController {
 		if ($filetype == "audio/ogg")
 			$extension = ".ogg";
 		
+		if ($filetype == "audio/aac")
+			$extension = ".m4a";
+		
 		$filename = $usuario.$extension;
 		$audio_file_path = storage_path("tmp_voices/").$filename;
 		
@@ -29,8 +32,10 @@ class VoiceAccess extends BaseController {
 		
 		if ($filetype == "audio/wav") {
 			$raw_audio_file_path = AudioTools::WavToRaw($usuario);
-		} else {
+		} else if ($filetype == "audio/ogg") {
 			$raw_audio_file_path = AudioTools::OggToRaw($usuario);
+		} else {
+			$raw_audio_file_path = AudioTools::AacToRaw($usuario);
 		}
 		
 		return $raw_audio_file_path;

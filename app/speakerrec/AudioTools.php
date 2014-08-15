@@ -17,4 +17,12 @@ class AudioTools {
 		exec($command);
 		return AudioTools::WavToRaw($user);
 	}
+	
+	public static function AacToRaw($user) {
+		$input_file_path = storage_path("tmp_voices/").$user.".m4a";
+		$output_file_path = storage_path("tmp_voices/").$user.".wav";
+		$command = "faad $input_file_path $output_file_path";
+		exec($command);
+		return AudioTools::WavToRaw($user);
+	}
 }
