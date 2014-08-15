@@ -6,8 +6,8 @@ use \Input;
 use \Request;
 use \Response;
 use \apibvw\Model\User as ModelUser;
-use apibvw\SpeakerRec\AudioTools;
-use apibvw\SpeakerRec\SpeakerRecognitionManager;
+use \apibvw\SpeakerRec\AudioTools;
+use \apibvw\SpeakerRec\SpeakerRecognitionManager;
 
 class VoiceAccess extends BaseController {
 	
