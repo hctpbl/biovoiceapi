@@ -17,7 +17,7 @@ class VoiceAccess extends BaseController {
 		if (Input::hasFile('audiofile')) {
 			$file = Input::file("audiofile");
 			$destination = storage_path("tmp_voices/").$file->getClientOriginalName();
-			$file->move($destination, $file);
+			$file->move($destination);
 		} else {
 			$audio_raw = Request::getContent();
 			
