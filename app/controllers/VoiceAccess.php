@@ -2,6 +2,7 @@
 namespace apibvw\Controller;
 
 use \BaseController;
+use \Input;
 use \Request;
 use \Response;
 use \apibvw\Model\User as ModelUser;
@@ -12,21 +13,26 @@ class VoiceAccess extends BaseController {
 	
 	private function handleAudio($usuario) {
 		$filetype = Request::header('Content-Type');
-		$audio_raw = Request::getContent();
 		
-		$extension = ".wav";
-		
-		if ($filetype == "audio/ogg")
-			$extension = ".ogg";
-		
-		if ($filetype == "audio/aac")
-			$extension = ".m4a";
-		
-		$filename = $usuario.$extension;
-		$audio_file_path = storage_path("tmp_voices/").$filename;
-		
-		$f = fopen($audio_file_path, "w");
-		fwrite($f, $audio_raw);
+		if (Input::hasFile('audiofile')) {
+			$file = Input::file("audiofile");
+			$destination = storage_path("tmp_voices/").$file->getClientOriginalName();
+			$file->move($destination, $file);
+		} else {
+			$audio_raw = Request::getContent();
+			
+			$extension = ".wav";
+			if ($filetype == "audio/ogg")
+				$extension = ".ogg";
+			if ($filetype == "audio/aac")
+				$extension = ".m4a";
+			
+			$filename = $usuario.$extension;
+			$audio_file_path = storage_path("tmp_voices/").$filename;
+			
+			$f = fopen($audio_file_path, "w");
+			fwrite($f, $audio_raw);
+		}
 		
 		$raw_audio_file_path = "";
 		
