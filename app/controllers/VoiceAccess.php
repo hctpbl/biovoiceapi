@@ -56,7 +56,7 @@ class VoiceAccess extends BaseController {
 		
 		$result = $speaker_rec_package->enroll($raw_audio_file_path);
 
-		return Response::json(array('error'=>false, 'result' => $result),200);
+		return Response::json(array('error'=>false, 'result' => '0'),200);
 	}
 	
 	public function postTest($usuario) {
