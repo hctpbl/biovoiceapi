@@ -61,11 +61,12 @@ class Users extends BaseController {
 			$usuario->email = $data['email'];
 			$usuario->save();
 			$usuario = ModelUser::find($data['username']);
-			return Response::v1apijson(201,false,array('user'=>$usuario->toArray()))
-					->header('Location',URL::action('apibvw\Controller\Users@show',$data['username']));
+			return Response::v1apijson(201,false,array('user'=>$usuario->toArray(), 'messages'=>null))
+					->header('Location',URL::action('apibvw\Controller\Users@show',$data['username']),
+							"User successfully created.");
 		}
 
-		return Response::v1apijson(400,true,array('messages' => $validator->messages()->toArray()),
+		return Response::v1apijson(400,true,array('messages' => $validator->messages()->toArray(), 'user'=>null),
 							"Unable to create user with provided data. Check errors and try again.");
 	}
 	
