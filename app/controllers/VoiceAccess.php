@@ -2,6 +2,7 @@
 namespace apibvw\Controller;
 
 use \BaseController;
+use \Config;
 use \Input;
 use \Request;
 use \Response;
@@ -53,10 +54,11 @@ class VoiceAccess extends BaseController {
 		
 		$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario,
 				SpeakerRecognitionManager::ENGINE_ALIZEPHP);
-		
+
+		$threshold = Config::get('speakerrec.threshold');
 		$result = $speaker_rec_package->enroll($raw_audio_file_path);
 
-		return Response::json(array('error'=>false, 'result' => '0'),200);
+		return Response::json(array('error'=>false, 'threshold'=>$threshold, 'result' => '0'),200);
 	}
 	
 	public function postTest($usuario) {
@@ -65,10 +67,11 @@ class VoiceAccess extends BaseController {
 		
 		$speaker_rec_package = SpeakerRecognitionManager::getSpeakerRecognitionSystem($usuario,
 				SpeakerRecognitionManager::ENGINE_ALIZEPHP);
-		
+
+		$threshold = Config::get('speakerrec.threshold');
 		$result = $speaker_rec_package->testSpeakerIdentity($raw_audio_file_path);
 
-		return Response::json(array('error'=>false, 'result' => $result),200);
+		return Response::json(array('error'=>false, 'threshold'=>$threshold, 'result' => $result),200);
 	}
 	
 	public function getStatus($usuario) {
