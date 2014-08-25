@@ -45,9 +45,9 @@ class Users extends BaseController {
 		$data = Input::all();
 		
 		$rules = array (
-			'first_name' => 'required|max:30',
-			'surname' => 'max:100',
-			'username' => 'required|unique:user,username|max:6|min:2',
+			'first_name' => 'required|alpha_spaces|max:30',
+			'surname' => 'required|alpha_spaces|max:100',
+			'username' => 'required|alpha_dash|unique:user,username|max:6|min:2',
 			'email' => 'required|email|unique:user,email|max:50',
 		);
 		
