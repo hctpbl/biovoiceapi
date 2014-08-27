@@ -25,4 +25,12 @@ class AudioTools {
 		exec($command);
 		return AudioTools::WavToRaw($user);
 	}
+	
+	public static function Mp3ToRaw($user) {
+		$input_file_path = storage_path("tmp_voices/").$user.".mp3";
+		$output_file_path = storage_path("tmp_voices/").$user.".wav";
+		$command = "avconv -y -i $input_file_path $output_file_path 2> /dev/null";
+		exec($command);
+		return AudioTools::WavToRaw($user);
+	}
 }

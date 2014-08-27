@@ -11,6 +11,7 @@ use \Lang;
 use \Response;
 use \URL;
 
+use \apibvw\Model\User as ModelUser;
 
 /*
  * Macro for the BioVoiceWeb Api responses
@@ -24,7 +25,6 @@ Response::macro('v1apijson', function ($http_code, $error, $data, $message = nul
 	return Response::json($json_data, $http_code);
 });
 
-use \apibvw\Model\User as ModelUser;
 
 class Users extends BaseController {
 	

@@ -2,6 +2,8 @@
 
 return array(
 
+	'default' => 'sqlite',
+
 	'connections' => array(
 	
 			'mysql' => array(
@@ -15,6 +17,12 @@ return array(
 					'prefix'    => '',
 					'port'		=> '3307',
 			),
+			
+			'sqlite' => array(
+					'driver'=>'sqlite',
+					'database'=>__DIR__.'/../../database/test.sqlite',
+					'prefix'=>''
+			)
 	
 	)
 );

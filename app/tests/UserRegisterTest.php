@@ -35,7 +35,6 @@ class UserRegisterTest extends TestCase {
 		
 		$response = $this->call('POST','v1/users', $data);
 		$resp_data = $response->getData();
-		
 		$this->assertResponseStatus(201);
 		$this->assertEquals($resp_data->user->username, $this->username);
 		$this->assertEquals($resp_data->user->first_name, $this->first_name);
@@ -349,10 +348,10 @@ class UserRegisterTest extends TestCase {
 	
 	/**
 	 * NOT DOCUMENTED
-	 * Tests de deletion of a user
+	 * Tests the deletion of a user
 	 */
 	public function testDeleteSuccessful() {
-		$response = $this->call('DELETE','v1/users/testus');
+		$response = $this->call('DELETE','v1/users/'.$this->username);
 		$this->assertResponseOk();
 	}
 }

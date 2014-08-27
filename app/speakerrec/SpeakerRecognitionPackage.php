@@ -52,7 +52,15 @@ interface SpeakerRecognitionPackage {
 	 * 
 	 * @param string $audio_file_path Path to audio file with a sample voice to test
 	 * 						against existing $user data to check identity matching.
-	 * @return bool true if $audio_file_path belongs to $user, false if not.
+	 * @return float The value resulting for the speaker verification process.
 	 */
 	public function testSpeakerIdentity($audio_file_path);
+	
+	/**
+	 * 
+	 * Deletes all files that belong to $user. 
+	 * 
+	 * @return bool true if the operation completed successfully, false otherwise
+	 */
+	public function deleteUser();
 }
