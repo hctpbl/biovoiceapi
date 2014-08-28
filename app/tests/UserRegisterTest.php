@@ -35,6 +35,7 @@ class UserRegisterTest extends TestCase {
 		
 		$response = $this->call('POST','v1/users', $data);
 		$resp_data = $response->getData();
+		var_dump($resp_data);
 		$this->assertResponseStatus(201);
 		$this->assertEquals($resp_data->user->username, $this->username);
 		$this->assertEquals($resp_data->user->first_name, $this->first_name);

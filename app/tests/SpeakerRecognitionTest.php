@@ -35,6 +35,11 @@ class SpeakerRecognitionTest extends TestCase {
 		exec($command);
 	}
 	
+	private function removeAudioFile() {
+		unlink($this->getWorkingPath().$this->filename_path.$this->filename_name);
+		//exec($command);
+	}
+	
 	public function setUp() {
 		parent::setUp();
 		$this->seed();
@@ -56,6 +61,10 @@ class SpeakerRecognitionTest extends TestCase {
 		$this->assertFalse($resp_data->enrolled);
 	}
 	
+	/**
+	 * T-API17
+	 * Tests the enrollment of a user in the system
+	 */
 	public function testEnrollment() {
 		$file = new UploadedFile(
 			$this->getWorkingPath() . $this->filename_path . $this->filename_name,
@@ -76,6 +85,10 @@ class SpeakerRecognitionTest extends TestCase {
 		$this->assertFalse($resp_data->error);
 	}
 	
+	/**
+	 * T-API18
+	 * Tests a user enrollment with an unregistered user
+	 */
 	public function testEnrollmentNotRegistered() {
 		$file = new UploadedFile(
 			$this->getWorkingPath() . $this->filename_path . $this->filename_name,
@@ -96,6 +109,10 @@ class SpeakerRecognitionTest extends TestCase {
 		$this->assertTrue($resp_data->error);
 	}
 	
+	/**
+	 * T-API20
+	 * Tests a successful verification (in terms of completeness) of a speaker
+	 */
 	public function testVerification() {
 		$file = new UploadedFile(
 			$this->getWorkingPath() . $this->filename_path . $this->filename_name,
@@ -118,6 +135,10 @@ class SpeakerRecognitionTest extends TestCase {
 		$this->deleteAlizePHPUser();
 	}
 	
+	/**
+	 * T-API21
+	 * Tests the verification of a user who is not enrolled in the system
+	 */
 	public function testVerificationNotEnrolled() {
 		$file = new UploadedFile(
 			$this->getWorkingPath() . $this->filename_path . $this->filename_name,
@@ -137,5 +158,23 @@ class SpeakerRecognitionTest extends TestCase {
 		$this->assertResponseStatus(400);
 		$this->assertTrue($resp_data->error);
 	}
+	
+	/*public function testVerificationInvalidFilename() {
+		$file = new UploadedFile(
+			$this->getWorkingPath() . $this->filename_path . $this->filename_name,
+			$this->filename_name,
+			$this->filename_type
+		);
+		
+		$this->removeAudioFile();
+		
+		$resp_data = $response->getData();
+		var_dump($resp_data);
+		
+		$this->assertResponseOk();
+		$this->assertFalse($resp_data->error);
+		
+		$this->deleteAlizePHPUser();
+	}*/
 	
 }
