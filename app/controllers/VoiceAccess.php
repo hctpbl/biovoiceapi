@@ -38,7 +38,7 @@ class VoiceAccess extends BaseController {
 			if ($filetype == "application/x-www-form-urlencoded") {
 				$filetype = $file->getMimeType();
 			} else {
-				//$filetype = $file->getClientMimeType();
+				$filetype = $file->getClientMimeType();
 			}
 			$filename = $usuario.$this->getCorrectExtension($filetype);
 			$file->move($destination, $filename);

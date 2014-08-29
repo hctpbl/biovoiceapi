@@ -40,7 +40,7 @@ class AlizePHPFacade implements SpeakerRecognitionPackage {
 		$this->enroll_alizephp_user($alizephp_user, $audio_file_path);
 		//$test_result = $alizephp_user->ivTest($this->getUser());
 		$test_result = $alizephp_user->computeTest($this->getUser());
-		$this->deleteUser();
+		$alizephp_user->cleanUserFiles();
 		
 		return $test_result;
 	}
