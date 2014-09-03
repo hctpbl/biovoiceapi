@@ -10,7 +10,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 class User extends Eloquent {
 
 	/**
-	 * The database table used by the model.
+	 * The database table used by the model. In this case, 'user'.
 	 *
 	 * @var string
 	 */
@@ -61,6 +61,13 @@ class User extends Eloquent {
 	public function getReminderEmail()
 	{
 		return $this->email;
+	}
+	
+	/**
+	 * Get the sessions of a user
+	 */
+	public function sessions() {
+		return $this->hasMany('Session');
 	}
 
 }

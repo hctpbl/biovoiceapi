@@ -9,6 +9,7 @@ use \Log;
 use \Request;
 use \Response;
 use \apibvw\Model\User as ModelUser;
+use \apibvw\Model\Session as ModelSession;
 use \apibvw\SpeakerRec\AudioTools;
 use \apibvw\SpeakerRec\SpeakerRecognitionManager;
 use \apibvw\SpeakerRec\SpeakerRecognitionException;
@@ -111,6 +112,11 @@ class VoiceAccess extends BaseController {
 					'result' => '0'
 			),400);
 		}
+		
+		$ses = new ModelSession();
+		$ses->user_username = $usuario;
+		$ses->type = 0;
+		$ses->save();
 
 		return Response::json(array(
 				'error'=>false,
@@ -158,6 +164,12 @@ class VoiceAccess extends BaseController {
 					'threshold'=>$threshold,
 			),400);
 		}
+		
+		$ses = new ModelSession();
+		$ses->user_username = $usuario;
+		$ses->type = 1;
+		$ses->result = $result;
+		$ses->save();
 
 		return Response::json(array(
 				'error'=>false,
