@@ -14,8 +14,27 @@ use \apibvw\SpeakerRec\AudioTools;
 use \apibvw\SpeakerRec\SpeakerRecognitionManager;
 use \apibvw\SpeakerRec\SpeakerRecognitionException;
 
+/**
+ * 
+ * Controller to handle API request to perform voice access operations.
+ * 
+ * For a clearer documentation of the API, client-oriented, please visit 
+ * http://docs.biovoiceapi.apiary.io/
+ * 
+ * The base URL for this actions is v1/voiceaccess
+ * 
+ * @author Héctor Pablos
+ *
+ */
 class VoiceAccess extends BaseController {
 	
+	/**
+	 * Depending on a Content-Type like string, returns the right
+	 * extension of a file.
+	 * 
+	 * @param string $filetype Content-Type like string
+	 * @return string
+	 */
 	private function getCorrectExtension($filetype) {
 			$extension = ".wav";
 			
@@ -30,6 +49,16 @@ class VoiceAccess extends BaseController {
 			return $extension;
 	}
 	
+	/**
+	 * 
+	 * Receives a username whose audio sample has been uploaded and processes
+	 * that file, creating a PCM audio file that can be passed to a speaker
+	 * verification engine.
+	 * 
+	 * @param string $usuario username for a user whose audio sample has been uploaded
+	 * @throws SpeakerRecognitionException
+	 * @return string
+	 */
 	private function handleAudio($usuario) {
 		$filetype = Request::header('Content-Type');
 		
@@ -74,6 +103,14 @@ class VoiceAccess extends BaseController {
 		return $raw_audio_file_path;
 	}
 
+	/**
+	 * 
+	 * Enrolls a user identified by $username in the syste, creating his model.
+	 * 
+	 * URL: POST v1/voiceaccess/enroll/{username}
+	 * 
+	 * @param string $usuario username of the user to enroll
+	 */
 	public function postEnroll($usuario) {
 		$threshold = Config::get('speakerrec.threshold');
 		$user = ModelUser::find($usuario);
@@ -126,6 +163,14 @@ class VoiceAccess extends BaseController {
 		),200);
 	}
 	
+	/**
+	 * Performs a speaker verification for $username, using the audio file POSTed
+	 * via HTTP.
+	 * 
+	 * URL: POST v1/voiceaccess/test/{username}
+	 * 
+	 * @param string $usuario username of the user whose identity verify
+	 */
 	public function postTest($usuario) {
 		$threshold = Config::get('speakerrec.threshold');
 		
@@ -179,6 +224,15 @@ class VoiceAccess extends BaseController {
 		),200);
 	}
 	
+	/**
+	 * 
+	 * Checks the status of $username user in the system, returning information
+	 * of wether he is registered and enrolled or not.
+	 * 
+	 * URL: v1/voiceaccess/test/{username}
+	 * 
+	 * @param string $usuario
+	 */
 	public function getStatus($usuario) {
 		$registered = false;
 		$enrolled = false;

@@ -26,13 +26,41 @@ Response::macro('v1apijson', function ($http_code, $error, $data, $message = nul
 });
 
 
+/**
+ * 
+ * User controller to handle CRUD actions over users in database using
+ * HTTP verbs.
+ * 
+ * For a clearer documentation of the API, client-oriented, please visit 
+ * http://docs.biovoiceapi.apiary.io/
+ * 
+ * The base URL for this actions is v1/users
+ * 
+ * @author Héctor Pablos
+ * @see http://docs.biovoiceapi.apiary.io/
+ */
 class Users extends BaseController {
 	
+	/**
+	 * 
+	 * Returns a JSON with every user in the database.
+	 * 
+	 * URL: GET v1/users
+	 * 
+	 */
 	public function index() {
 		$user = ModelUser::get();
 		return Response::v1apijson(200, false, array('users'=>$user->toArray()));
 	}
 	
+	/**
+	 * 
+	 * Returns JSON ith de data of the user identified by $username
+	 * 
+	 * URL: GET v1/users/{username}
+	 * 
+	 * @param string $username
+	 */
 	public function show($username) {
 		$user = ModelUser::find($username);
 		if (!$user) {
@@ -41,6 +69,13 @@ class Users extends BaseController {
 		return Response::v1apijson(200,false,array('user'=>$user->toArray()));
 	}
 	
+	/**
+	 * 
+	 * Registers a user in the database
+	 * 
+	 * URL: POST v1/users
+	 * 
+	 */
 	public function store() {
 		$data = Input::all();
 		
@@ -70,6 +105,12 @@ class Users extends BaseController {
 							"Unable to create user with provided data. Check errors and try again.");
 	}
 	
+	/**
+	 * 
+	 * Deletes the user identified by $username from de database
+	 * 
+	 * @param string $username
+	 */
 	public function destroy($username) {
 		$user = ModelUser::find($username);
 		if (!$user) {
@@ -80,6 +121,12 @@ class Users extends BaseController {
 		return Response::v1apijson(200,false,null,"User deleted");
 	}
 	
+	/**
+	 * 
+	 * Makes every other HTTP request to this base address return a 405 response
+	 * 
+	 * @param unknown $paramenters
+	 */
 	public function missingMethod($paramenters = array()) {
 		return Response::json(array(),405);
 	}

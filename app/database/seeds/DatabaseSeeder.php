@@ -2,6 +2,7 @@
 
 use \apibvw\Model\User as User;
 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -18,6 +19,15 @@ class DatabaseSeeder extends Seeder {
 
 }
 
+/**
+ *
+ * Seeds a database to perform unit tests. It should
+ * be an sqlite database, for performance considerations, 
+ * and it must already have the proper tables.
+ *
+ * @author Héctor Pablos
+ *
+ */
 class UserTableSeeder extends Seeder {
 	
 	private $field_username = 'username';
@@ -30,6 +40,9 @@ class UserTableSeeder extends Seeder {
 	private $surname = 'User';
 	private $email = 'test@user.com';
 	
+	/**
+	 * Creates a user in the test database with username='testus'
+	 */
 	public function run() {
 		DB::table('user')->delete();
 		

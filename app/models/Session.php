@@ -4,6 +4,13 @@ namespace apibvw\Model;
 
 use \Eloquent;
 
+/**
+ * Model class for a Session. It stores the time, type and result of every
+ * enrollment or verifying operation of a user.
+ * 
+ * @author Héctor Pablos
+ *
+ */
 class Session extends Eloquent {
 
 	/**

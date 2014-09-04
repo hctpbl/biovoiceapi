@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * User related unit tests
+ * 
+ * @author Héctor Pablos
+ *
+ */
 class UserRegisterTest extends TestCase {
 	
 	private $field_username = 'username';
@@ -12,6 +18,15 @@ class UserRegisterTest extends TestCase {
 	private $surname = 'User';
 	private $email = 'test@user.com';
 	
+	/**
+	 * Creates an array with user data to test and returns it
+	 * 
+	 * @param string $username
+	 * @param string $first_name
+	 * @param string $surname
+	 * @param string $email
+	 * @return array
+	 */
 	private function getUserData($username, $first_name, $surname, $email) {
 		return array(
 			$this->field_username=>$username,

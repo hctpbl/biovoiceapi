@@ -7,6 +7,14 @@ use \Eloquent;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
+/**
+ * 
+ * Model class for a User. It stores its username, first name, surname, email and
+ * time and date of his registry
+ * 
+ * @author Héctor Pablos
+ *
+ */
 class User extends Eloquent {
 
 	/**
@@ -16,6 +24,11 @@ class User extends Eloquent {
 	 */
 	protected $table = 'user';
 	
+	/**
+	 * The primary key for the table, 'username' in our case
+	 * 
+	 * @var string
+	 */
 	protected $primaryKey = 'username';
 	
 	/**
@@ -25,43 +38,6 @@ class User extends Eloquent {
 	 * @var boolean
 	 */
 	public $timestamps = false;
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	//protected $hidden = array('password');
-
-	/**
-	 * Get the unique identifier for the user.
-	 *
-	 * @return mixed
-	 */
-	public function getAuthIdentifier()
-	{
-		return $this->getKey();
-	}
-
-	/**
-	 * Get the password for the user.
-	 *
-	 * @return string
-	 */
-	/*public function getAuthPassword()
-	{
-		return $this->password;
-	}*/
-
-	/**
-	 * Get the e-mail address where password reminders are sent.
-	 *
-	 * @return string
-	 */
-	public function getReminderEmail()
-	{
-		return $this->email;
-	}
 	
 	/**
 	 * Get the sessions of a user

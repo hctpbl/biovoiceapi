@@ -5,6 +5,12 @@ use \apibvw\Model\User as ModelUser;
 use \Illuminate\Database\Eloquent;
 use \apibvw\speakerrec\AlizePHPFacade;
 
+/**
+ * Speaker recognition related tests
+ * 
+ * @author Héctor Pablos
+ *
+ */
 class SpeakerRecognitionTest extends TestCase {
 	
 	private $field_username = 'username';
