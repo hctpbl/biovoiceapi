@@ -11,14 +11,8 @@
 |
 */
 
-//Route::controller('users', 'apibvw\Controller\Users');
 Route::group(array('prefix' => 'v1'), function()
 {
 	Route::resource('users', 'apibvw\Controller\Users');
 	Route::controller('voiceaccess', 'apibvw\Controller\VoiceAccess');
-});
-
-Route::get('/', function()
-{
-	return View::make('hello');
 });
