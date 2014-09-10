@@ -26,7 +26,7 @@ return array(
     ),
 
     'paths' => array(
-        'v1/*' => array(
+        '*' => array(
             'allowedOrigins' => array('*'),
             'allowedHeaders' => array('Content-Type'),
             'allowedMethods' => array('POST', 'PUT', 'GET', 'DELETE'),
